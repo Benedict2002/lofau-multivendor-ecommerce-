@@ -1,21 +1,4 @@
-/* import { createAsyncThunk } from "@reduxjs/toolkit"
-import { api } from "../config/Api"
-
-export const sellerLognin = createAsyncThunk<any,any>("/sellerAuth/sellerLognin", 
-    async(loginRequest, {rejectWithValue})=>{
-    try{
-        const response = await api.post("/sellers/login", loginRequest
-        )
-        console.log("login otp ", response.data)
-
-    }catch(error){
-        console.log("error ---", error)
-    }
-}) */
-
-
-
-    import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { api } from "../../config/Api";
 
 
