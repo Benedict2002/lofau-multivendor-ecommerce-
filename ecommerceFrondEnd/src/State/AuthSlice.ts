@@ -2,70 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { api } from "../config/Api";
 
 
-/* export const sendLoginSignUpOtp = createAsyncThunk("/auth/sendLoginSignUpOtp", 
-    async({email}:{email: string}, {rejectWithValue})=>{
-    try{
-        const response = await api.post("auth/sent/login-signup-otp", {email}
-        )
-        console.log("login otp ", response)
 
-    }catch(error){
-        console.log("error ---", error)
-    }
-}) */
-
-   /* export const sendLoginSignUpOtp = createAsyncThunk(
-  "/auth/sendLoginSignUpOtp",
-  async ({ email }: { email: string }, { rejectWithValue }) => {
-    try {
-      const response = await api.post("auth/sent/login-signup-otp", {
-        email,
-        role: "ROLE_SELLER", // hardcoded role
-      });
-      console.log("OTP sent:", response.data);
-      return response.data;
-    } catch (error: any) {
-      console.error("OTP send error:", error.response?.data || error.message);
-      return rejectWithValue(error.response?.data || "Failed to send OTP");
-    }
-  }
-);
-
-
-
-export const signin = createAsyncThunk<any,any>("/auth/signin", 
-    async(loginRequest, {rejectWithValue})=>{
-    try{
-        const response = await api.post("auth/sent/signing", loginRequest
-        )
-        console.log("login otp ", response.data)
-
-    }catch(error){
-        console.log("error ---", error)
-    }
-})
-
-export default AuthSlice; */
-
-//////////////////////////////////////
-
-
-// export const sendLoginSignUpOtp = createAsyncThunk(
-//   "auth/sendLoginSignUpOtp",
-//   async ({ email }: { email: string }, { rejectWithValue }) => {
-//     try {
-//       const response = await api.post("auth/sent/login-signup-otp", {
-//         email,
-//         role: "ROLE_CUSTOMER", // hardcoded role
-//       });
-//       console.log("OTP sent:", response.data);
-//       return response.data;
-//     } catch (error: any) {
-//       console.error("OTP send error:", error.response?.data || error.message);
-//       return rejectWithValue(error.response?.data || "Failed to send OTP");
-//     }
-//   }
-// );
 
 export const sendLoginSignUpOtp = createAsyncThunk(
   "auth/sendLoginSignUpOtp",
@@ -82,51 +19,7 @@ export const sendLoginSignUpOtp = createAsyncThunk(
 );
 
 
-// export const signin = createAsyncThunk(
-//   "auth/signin",
-//   async ({ email, otp }: { email: string; otp: string }, { rejectWithValue }) => {
-//     try {
-//       const response = await api.post("auth/signin", {
-//         email,
-//         otp,
-//         role: "ROLE_SELLER", // backend expects role
-//       });
-//       console.log("Signin response:", response.data);
-//       return response.data;
-//     } catch (error: any) {
-//       console.error("Signin error:", error.response?.data || error.message);
-//       return rejectWithValue(error.response?.data || "Login failed");
-//     }
-//   }
-// );
-//working
 
-// export const signin = createAsyncThunk(
-//   "auth/signin",
-//   async (
-//     { email, otp }: { email: string; otp: string },
-//     { rejectWithValue }
-//   ) => {
-//     try {
-//       const response = await api.post("/auth/signing", {
-//         email,
-//         otp
-//       });
-
-//       console.log("Signin response:", response.data);
-//       return response.data;
-//     } catch (error: any) {
-//       console.error("Signin error:", error.response?.data || error.message);
-//       return rejectWithValue(error.response?.data || "Login failed");
-//     }
-//   }
-// );
-
-// Define a TypeScript interface matching your backend LoginRequest
-// export interface LoginRequest {
-//   email: string;
-//   otp: string;
-// }
 
 // Async thunk for signing in
 export const signin = createAsyncThunk(
