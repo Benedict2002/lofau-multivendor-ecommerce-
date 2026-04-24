@@ -1,31 +1,40 @@
-import React from "react";
+import React, { useEffect } from "react";
 import store, { useAppDispatch, useAppSelector } from "../../../State/Store";
 import { useFormik } from "formik";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { sendLoginSignUpOtp, signin } from "../../../State/AuthSlice";
 import CircularProgress from "@mui/material/CircularProgress";
+import { useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
   const { auth } = useAppSelector((store) => store);
+  useEffect(() => {
+    if (!auth.user) return;
+
+    if (auth.user.role === "ROLE_ADMIN") {
+      navigate("/admin");
+    } else if (auth.user.role === "ROLE_SELLER") {
+      navigate("/seller");
+    } else {
+      navigate("/");
+    }
+  }, [auth.user, navigate]);
+
   const formik = useFormik({
     initialValues: {
       email: "",
       otp: "",
     },
-    /* onSubmit: (values) => {
-          console.log("form data", values);
-          //values.otp=Number(values.otp)
-          dispatch(sellerLogin({ email: values.email, otp: values.otp }));
-        }, */
+
     onSubmit: async (values) => {
       console.log("form data", values);
 
       try {
         const res = await dispatch(signin(values));
-
-        console.log("LOGIN SUCCESS:", res);
       } catch (err) {
         console.error("LOGIN ERROR:", err);
       }
@@ -77,6 +86,7 @@ const LoginForm = () => {
 
         {auth.otpSent ? (
           <Button
+            disabled={auth.loading}
             onClick={() => formik.handleSubmit()}
             fullWidth
             variant="contained"
