@@ -76,13 +76,6 @@ function App() {
   return (
     <ThemeProvider theme={customeTheme}>
       <div>
-        {/*<Home />*/}
-        {/*<Product />*/}
-        {/*<ProductDetails />*/}
-        {/*<Review />*/}
-        {/*<Cart />*/}
-        {/* <Checkout />*/}
-        {/* <Account /> */}
         <Navbar />
 
         <Routes>
