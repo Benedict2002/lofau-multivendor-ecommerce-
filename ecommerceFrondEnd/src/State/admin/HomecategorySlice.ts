@@ -16,30 +16,7 @@ const initialState: CategoryState = {
   updated: false,
 };
 
-// ✅ UPDATE CATEGORY
-// export const updateCategory = createAsyncThunk<
-//   HomeCategory,
-//   { id: number; data: any }
-// >("category/updateCategory", async ({ id, data }, { rejectWithValue }) => {
-//   try {
-//     const response = await api.patch(
-//       `/admin/home-category/${id}`,
-//       data,
-//       {
-//         headers: {
-//           "Content-Type": "application/json",
-//           Authorization: `Bearer ${localStorage.getItem("jwt")}`,
-//         },
-//       }
-//     );
 
-//     return response.data;
-//   } catch (error: any) {
-//     return rejectWithValue(
-//       error.response?.data?.message || "Failed to update category"
-//     );
-//   }
-// });
 
 export const updateCategory = createAsyncThunk<
   HomeCategory,
