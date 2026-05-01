@@ -126,11 +126,14 @@ const dealSlice = createSlice({
             state.dealCreated = false;
         });
 
-        builder.addCase(createDeal.fulfilled, (state, action:PayloadAction<Deal>) => {
-            state.loading = false;
-            state.dealCreated = true;
-            state.deals.push(action.payload);
-        });
+       builder.addCase(createDeal.fulfilled, (state, action: PayloadAction<Deal>) => {
+    state.loading = false;
+    state.dealCreated = true;
+
+    console.log("🔥 CREATE DEAL RESPONSE (RAW):", action.payload);
+
+    state.deals.push(action.payload);
+});
 
         builder.addCase(createDeal.rejected, (state, action) => {
             state.loading = false;
