@@ -24,29 +24,70 @@ public class DealServiceImpl implements DealService {
 
     @Override
     public Deal createDeal(Deal deal) {
-        HomeCategory category = homeCategoryRepository.findById(
-                deal.getCategory().getId()).orElse(null);
-        Deal newDeal = dealRepository.save(deal);
-        newDeal.setCategory(category);
+
+        Long categoryId = deal.getCategory().getId();
+
+        HomeCategory category = homeCategoryRepository.findById(categoryId)
+                .orElseThrow(() -> new RuntimeException("Category not found"));
+
+        Deal newDeal = new Deal();
         newDeal.setDiscount(deal.getDiscount());
+        newDeal.setCategory(category);
+
         return dealRepository.save(newDeal);
     }
 
+//    @Override
+//    public Deal updateDeal(Deal deal, Long id) throws Exception {
+//        Deal existingDeal = dealRepository.findById(id).orElse(null);
+//        HomeCategory category=homeCategoryRepository.findById(deal.getCategory().getId()).orElse(null);
+//
+//        if(existingDeal!=null){
+//            if(deal.getDiscount()!=null){
+//                existingDeal.setDiscount(deal.getDiscount());
+//            }
+//            if(deal.getCategory()!=null){
+//                existingDeal.setCategory(category);
+//            }
+//            return dealRepository.save(existingDeal);
+//        }
+//        throw new Exception("Deal not found");
+//    }
+
     @Override
     public Deal updateDeal(Deal deal, Long id) throws Exception {
-        Deal existingDeal = dealRepository.findById(id).orElse(null);
-        HomeCategory category=homeCategoryRepository.findById(deal.getCategory().getId()).orElse(null);
 
-        if(existingDeal!=null){
-            if(deal.getDiscount()!=null){
-                existingDeal.setDiscount(deal.getDiscount());
-            }
-            if(deal.getCategory()!=null){
-                existingDeal.setCategory(category);
-            }
-            return dealRepository.save(existingDeal);
+        Deal existingDeal = dealRepository.findById(id)
+                .orElseThrow(() -> new Exception("Deal not found"));
+
+        // update discount
+        if (deal.getDiscount() != null) {
+            existingDeal.setDiscount(deal.getDiscount());
         }
-        throw new Exception("Deal not found");
+
+        // update category fields safely
+        if (deal.getCategory() != null) {
+
+            HomeCategory existingCategory = existingDeal.getCategory();
+
+            if (existingCategory == null) {
+                existingCategory = new HomeCategory();
+            }
+
+            if (deal.getCategory().getImage() != null) {
+                existingCategory.setImage(deal.getCategory().getImage());
+            }
+
+            if (deal.getCategory().getCategoryId() != null) {
+                existingCategory.setCategoryId(
+                        deal.getCategory().getCategoryId()
+                );
+            }
+
+            existingDeal.setCategory(existingCategory);
+        }
+
+        return dealRepository.save(existingDeal);
     }
 
     @Override
