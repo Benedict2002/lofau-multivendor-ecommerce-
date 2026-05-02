@@ -101,26 +101,7 @@ export const fetchOrderItemById= createAsyncThunk<OrderItem, {orderItemId: numbe
     }
 )
 
-// export const paymentSuccess= createAsyncThunk<any, {paymentId: string; jwt: string; paymentLinkId: string },{rejectValue: string}>(
-//     "orders/paymentSuccess",
-//     async({paymentId,jwt, paymentLinkId},{rejectWithValue}) =>{
-//         try{
-//             const response = await api.get(`/api/payment/${paymentId}`, 
-//                 {headers: {Authorization: `Bearer ${jwt}`},
-//                 params:{paymentLinkId}
-                
-//             });
-//             console.log(" Payment success --- ", response.data);  
-            
-//             return response.data;
-//         }catch(error: any){
-//             console.log("error --", error.response);
-//             return rejectWithValue(
-//                 error.response.data.error || "Failed to fetch order history"
-//             )
-//         }
-//     }
-// )
+
 
 export const paymentSuccess = createAsyncThunk<
   any,
@@ -157,41 +138,6 @@ export const paymentSuccess = createAsyncThunk<
 
 
 
-// export const paymentSuccess = createAsyncThunk<
-//   any,
-//   { paymentId: string; jwt: string }, // removed paymentLinkId from payload
-//   { rejectValue: string }
-// >(
-//   "orders/paymentSuccess",
-//   async ({ paymentId, jwt }, { rejectWithValue }) => {
-//     try {
-//       // Step 1: get session_id from URL query params
-//       const urlParams = new URLSearchParams(window.location.search);
-//       const paymentLinkId = urlParams.get("session_id");
-
-//       if (!paymentLinkId) {
-//         return rejectWithValue("Payment session_id missing in URL");
-//       }
-
-//       // Step 2: call backend API with correct params
-//       const response = await api.get(`/api/payment/${paymentId}`, {
-//         headers: { Authorization: `Bearer ${jwt}` },
-//         params: { paymentLinkId }, // matches Spring @RequestParam
-//       });
-//       console.log("🔥 paymentSuccess thunk DISPATCHED");
-//     console.log("paymentId:", paymentId);
-//     console.log("jwt:", jwt);
-
-//       console.log("Payment success ---", response.data);
-//       return response.data;
-//     } catch (error: any) {
-//       console.log("error --", error.response);
-//       return rejectWithValue(
-//         error.response?.data?.error || "Failed to fetch payment"
-//       );
-//     }
-//   }
-// );
 
 
 

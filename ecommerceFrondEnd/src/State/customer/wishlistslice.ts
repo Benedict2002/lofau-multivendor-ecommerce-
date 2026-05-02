@@ -29,26 +29,7 @@ export const getWishlistByUserid = createAsyncThunk(
     }
 )
 
-// export const addProductToWishList = createAsyncThunk(
-//     "wishlist/addProductToWishList",
-//     async({productId}:{productId: number}, {rejectWithValue}) =>{
-//         try{
-//             const response = await api.post(`/api/wishlist/add-product/${productId}`,{
-//                 headers:{
-//                     Authorization: `Bearer ${localStorage.getItem("jwt")}`,
-//                 },
-//             })
-//             console.log("add product ", response.data);
-//             return response.data;
-//         }catch(error : any){
-//             console.log("error from add product  ", error)
-//             return rejectWithValue(
-//                 error.response?.data.message || "Failed to add product towishlist"
-//             )
-            
-//         }
-//     }
-// )
+
 export const addProductToWishList = createAsyncThunk(
   "wishlist/addProductToWishList",
   async ({ productId }: { productId: number }, { rejectWithValue }) => {
