@@ -117,8 +117,7 @@ export const fetchHomePageData = createAsyncThunk(
 );
 
 
-// ❌ REMOVE THIS IF NOT NEEDED (IMPORTANT)
-// If you leave it, make sure it's NOT called automatically
+
 export const createHomeCategories = createAsyncThunk(
   "home/createHomeCategories",
   async (homeCategories: HomeCategory[], { rejectWithValue }) => {
@@ -135,7 +134,7 @@ export const createHomeCategories = createAsyncThunk(
 );
 
 
-// ✅ STATE
+
 interface HomeState {
   homePageData: HomeData | null;
   loading: boolean;
@@ -149,14 +148,14 @@ const initialState: HomeState = {
 };
 
 
-// ✅ SLICE
+
 const customerSlice = createSlice({
   name: "home",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
 
-    // 🔥 FETCH
+    // FETCH
     builder.addCase(fetchHomePageData.pending, (state) => {
       state.loading = true;
       state.error = null;
@@ -167,7 +166,7 @@ const customerSlice = createSlice({
 
       const all = action.payload;
 
-      // ✅ SPLIT DATA FROM BACKEND
+      // SPLIT DATA FROM BACKEND
       state.homePageData = {
         electricCategories: all.filter(
           (c: HomeCategory) => c.section === "ELECTRIC_CATEGORY"
@@ -180,7 +179,7 @@ const customerSlice = createSlice({
         deals: [],
       };
 
-      console.log("✅ STORED IN REDUX:", state.homePageData);
+      console.log(" STORED IN REDUX:", state.homePageData);
     });
 
     builder.addCase(fetchHomePageData.rejected, (state, action) => {
@@ -189,7 +188,7 @@ const customerSlice = createSlice({
     });
 
 
-    // ⚠️ OPTIONAL CREATE (ONLY IF YOU USE IT MANUALLY)
+    //  OPTIONAL CREATE (ONLY IF YOU USE IT MANUALLY)
     builder.addCase(createHomeCategories.fulfilled, (state, action) => {
       state.homePageData = action.payload;
     });
