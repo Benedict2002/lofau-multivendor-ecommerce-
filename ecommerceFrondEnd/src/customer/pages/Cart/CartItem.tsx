@@ -12,12 +12,6 @@ import { updateCartItem } from "../../../State/customer/cartSlice";
 const CartItem = ({ item }: { item: CartItem }) => {
   const dispatch = useAppDispatch();
 
-  // const handleUpdateQuantity = () => {
-  //   dispatch(updateCartItem{jwt:localStorage.getItem("jwt"), cartItemId:item.id,
-  //     cartItem:{quantity: 1}
-  //   })
-  // };
-
   const handleUpdateQuantity = (value: number) => () => {
     const jwt = localStorage.getItem("jwt");
     if (!jwt) return;
