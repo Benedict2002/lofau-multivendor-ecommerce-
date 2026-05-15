@@ -1,36 +1,47 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { api } from "../../config/Api";
 
-// export const fetchSellerProfile = createAsyncThunk("/sellers/fetchSellerProfile", 
-//     async(jwt: string, {rejectWithValue})=>{
-//     try{
-//         const response = await api.get("sellers/profile",
-//             {
-//                 headers:{
-//                     Authorization: `Bearer ${jwt}`
-//                 }
-//             }
-//         )
-//         console.log("fetch seller profile ", response.data)
 
-//     }catch(error){
-//         console.log("error ---", error)
-//     }
-// })
-
-export const fetchSellerProfile = createAsyncThunk(
-  "seller/fetchSellerProfile",
-  async (jwt: string, { rejectWithValue }) => {
+// =======================
+// FETCH ALL SELLERS (ADMIN TABLE)
+// =======================
+export const fetchSellers = createAsyncThunk(
+  "seller/fetchSellers",
+  async (_, { rejectWithValue }) => {
     try {
-      // Get JWT from localStorage
       const jwt = localStorage.getItem("jwt");
-      console.log(" My jwt --",jwt);
-
 
       if (!jwt) {
-        // No token, reject immediately
         return rejectWithValue("JWT token is missing");
-        console.log("JWT token is missing");
+      }
+
+      const response = await api.get("/sellers", {
+        headers: {
+          Authorization: `Bearer ${jwt}`,
+        },
+      });
+
+      return response.data;
+    } catch (error: any) {
+      return rejectWithValue(
+        error.response?.data?.message || "Failed to fetch sellers"
+      );
+    }
+  }
+);
+
+
+// =======================
+// FETCH SELLER PROFILE
+// =======================
+export const fetchSellerProfile = createAsyncThunk(
+  "seller/fetchSellerProfile",
+  async (_, { rejectWithValue }) => {
+    try {
+      const jwt = localStorage.getItem("jwt");
+
+      if (!jwt) {
+        return rejectWithValue("JWT token is missing");
       }
 
       const response = await api.get("/sellers/profile", {
@@ -39,66 +50,133 @@ export const fetchSellerProfile = createAsyncThunk(
         },
       });
 
-      console.log("fetch seller profile:", response);
       return response.data;
-
     } catch (error: any) {
-      console.log("PROFILE ERROR ---", error);
-
-      const message =
-        error.response?.data?.message ||
-        error.response?.data?.error ||
-        error.message ||
-        "Failed to fetch seller profile";
-
-      return rejectWithValue(message);
+      return rejectWithValue(
+        error.response?.data?.message || "Failed to fetch seller profile"
+      );
     }
   }
 );
-interface SellerState{
-  sellers: any[],
-  selectedSeller: any,
-  profile:any,
-  report: any,
-  loading:boolean,
-  error:any,
-}
 
 
-const initialState: SellerState={
-  sellers: [],
-  selectedSeller:null,
-  profile:null,
-  report:null,
-  loading:false,
-  error:null,
+// =======================
+// FETCH SELLER REPORT
+// =======================
+export const fetchSellerReport = createAsyncThunk(
+  "seller/fetchSellerReport",
+  async (_, { rejectWithValue }) => {
+    try {
+      const jwt = localStorage.getItem("jwt");
 
+      if (!jwt) {
+        return rejectWithValue("JWT token is missing");
+      }
 
+      const response = await api.get("/sellers/report", {
+        headers: {
+          Authorization: `Bearer ${jwt}`,
+        },
+      });
 
-}
-
-const sellerSlice = createSlice({
-  name:"sellers",
-  initialState,
-  reducers:{},
-  extraReducers:(builder) =>{
-    builder.addCase(fetchSellerProfile.pending,(state) =>{
-      state.loading=true;
-
-
-    })
-    .addCase(fetchSellerProfile.fulfilled,(state,action)=>{
-      state.loading=false;
-      state.profile= action.payload
-    })
-    .addCase(fetchSellerProfile.rejected,(state,action)=>{
-      state.loading=false;
-      state.error= action.payload
-    })
+      return response.data;
+    } catch (error: any) {
+      return rejectWithValue(
+        error.response?.data?.message || "Failed to fetch seller report"
+      );
+    }
   }
+);
 
-})
 
+// =======================
+// STATE TYPE
+// =======================
+interface SellerState {
+  sellers: any[];
+  selectedSeller: any;
+  profile: any;
+  report: any;
+  loading: boolean;
+  error: any;
+}
+
+const initialState: SellerState = {
+  sellers: [],
+  selectedSeller: null,
+  profile: null,
+  report: null,
+  loading: false,
+  error: null,
+};
+
+
+// =======================
+// SLICE
+// =======================
+const sellerSlice = createSlice({
+  name: "sellers",
+  initialState,
+
+  reducers: {
+    setSelectedSeller: (state, action) => {
+      state.selectedSeller = action.payload;
+    },
+
+    clearSellerState: (state) => {
+      state.profile = null;
+      state.report = null;
+      state.selectedSeller = null;
+      state.error = null;
+    },
+  },
+
+  extraReducers: (builder) => {
+    builder
+
+      // ================= ALL SELLERS =================
+      .addCase(fetchSellers.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchSellers.fulfilled, (state, action) => {
+        state.loading = false;
+        state.sellers = action.payload;
+      })
+      .addCase(fetchSellers.rejected, (state, action: any) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+
+      // ================= PROFILE =================
+      .addCase(fetchSellerProfile.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchSellerProfile.fulfilled, (state, action) => {
+        state.loading = false;
+        state.profile = action.payload;
+      })
+      .addCase(fetchSellerProfile.rejected, (state, action: any) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+
+      // ================= REPORT =================
+      .addCase(fetchSellerReport.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(fetchSellerReport.fulfilled, (state, action) => {
+        state.loading = false;
+        state.report = action.payload;
+      })
+      .addCase(fetchSellerReport.rejected, (state, action: any) => {
+        state.loading = false;
+        state.error = action.payload;
+      });
+  },
+});
+
+export const { setSelectedSeller, clearSellerState } = sellerSlice.actions;
 
 export default sellerSlice.reducer;
-

@@ -17,6 +17,10 @@ import ReviewCard from "../Review/ReviewCard";
 import store, { useAppDispatch, useAppSelector } from "../../../State/Store";
 import { useParams } from "react-router-dom";
 import { fetchProductById } from "../../../State/customer/ProductSlice";
+import {
+  addItemToCart,
+  fetchUserCart,
+} from "../../../State/customer/cartSlice";
 
 const ProductDetails = () => {
   const [quantity, setQuantity] = React.useState(1);
@@ -27,6 +31,36 @@ const ProductDetails = () => {
 
   const handleActiveImage = (value: number) => () => {
     setActiveImage(value);
+  };
+
+  const handleAddToCart = async () => {
+    const jwt = localStorage.getItem("jwt");
+
+    if (!jwt) {
+      alert("Please login first");
+      return;
+    }
+
+    try {
+      await dispatch(
+        addItemToCart({
+          jwt,
+          request: {
+            productId: Number(productId),
+            size: "default", // change if your product has sizes
+            quantity: quantity,
+          },
+        }),
+      ).unwrap();
+
+      // refresh cart after adding
+      dispatch(fetchUserCart(jwt));
+
+      alert("Item added to cart!");
+    } catch (error) {
+      console.log(error);
+      alert("Failed to add item");
+    }
   };
 
   useEffect(() => {
@@ -128,6 +162,7 @@ const ProductDetails = () => {
           </div>
           <div className="mt-12 flex items-center gap-5">
             <Button
+              onClick={handleAddToCart}
               fullWidth
               variant="contained"
               startIcon={<AddShoppingCartIcon />}

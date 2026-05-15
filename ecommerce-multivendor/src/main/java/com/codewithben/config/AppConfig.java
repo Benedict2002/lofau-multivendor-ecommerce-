@@ -21,6 +21,11 @@ import java.util.Collections;
 @EnableWebSecurity
 public class AppConfig {
 
+    @Bean
+    public JwtTokenValidator jwtTokenValidator() {
+        return new JwtTokenValidator();
+    }
+
     //@Bean
    // public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
@@ -45,22 +50,22 @@ public class AppConfig {
                             session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                     )
                     .authorizeHttpRequests(auth -> auth
-                            // 🔓 AUTH ENDPOINTS (VERY IMPORTANT)
-                            .requestMatchers(
-                                    "/sellers/login",
-                                    "/auth/**",
-                                    "/sellers/send-otp"
-                            ).permitAll()
 
-                            // Public APIs
+                            // 🔓 PUBLIC ENDPOINTS (LOGIN / AUTH)
+                            .requestMatchers("/auth/**").permitAll()
+                            .requestMatchers("/sellers/login").permitAll()
+                            .requestMatchers("/sellers/send-otp").permitAll()
+
+                            // 🔓 PUBLIC API EXAMPLE
                             .requestMatchers("/api/products/*/reviews").permitAll()
 
-                            // Secured APIs
+                            // 🔒 PROTECTED ROUTES
                             .requestMatchers("/api/**").authenticated()
+                            .requestMatchers("/sellers/**").authenticated()
 
                             .anyRequest().permitAll()
                     )
-                    .addFilterBefore(new JwtTokenValidator(), BasicAuthenticationFilter.class)
+                    .addFilterBefore(jwtTokenValidator(), BasicAuthenticationFilter.class)
                     .csrf(csrf -> csrf.disable())
                     .cors(cors -> cors.configurationSource(corsConfigurationSource()));
 

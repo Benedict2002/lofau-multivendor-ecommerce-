@@ -25,7 +25,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/sellers")
+@RequestMapping("sellers")
 @Slf4j
 public class SellerController {
     private final SellerService sellerService;

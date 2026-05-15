@@ -126,7 +126,7 @@ const  cartSlice = createSlice({
         });
         builder.addCase(fetchUserCart.fulfilled, (state: any, action:PayloadAction<Cart>) =>{
             state.cart =action.payload;
-            state.loading= true;
+            state.loading= false;
         });
         builder.addCase(fetchUserCart.rejected, (state: any, action:any) =>{
             state.loading = false;
@@ -158,7 +158,7 @@ const  cartSlice = createSlice({
          builder.addCase(deleteCartItem.fulfilled, (state: any,action:any) =>{
             if(state.cart){
                 state.cart.cartItems= state.cart.cartItems.filter(
-                    (item:CartItem) => item.id !== action.meta.arg.cartItem
+                    (item:CartItem) => item.id !== action.meta.arg.cartItemId
                 );
                 const mrpPrice = sumCartItemMrpPrice(state.cart?.cartItems || [])
                 const sellingPrice = sumCartItemSellingPrice(state.cart?.cartItemId || [])

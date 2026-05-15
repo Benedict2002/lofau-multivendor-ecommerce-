@@ -27,11 +27,20 @@ import PaymentSuccess from "./customer/pages/PaymentSucces";
 import Wishlist from "./customer/wishlist/wishlist";
 import { createHomeCategories } from "./State/customer/customerSlice";
 import { homeCategories } from "./data/HomeCategories";
+import { fetchUserCart } from "./State/customer/cartSlice";
 
 function App() {
   const dispatch = useAppDispatch();
   const { seller, auth } = useAppSelector((store) => store);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = auth.jwt || localStorage.getItem("jwt");
+
+    if (!token) return;
+
+    dispatch(fetchUserCart(token));
+  }, [auth.jwt, dispatch]);
 
   // useEffect(() => {
   //   const jwt = localStorage.getItem("jwt");

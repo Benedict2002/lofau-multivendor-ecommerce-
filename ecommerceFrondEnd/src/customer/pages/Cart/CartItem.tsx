@@ -7,10 +7,32 @@ import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import type { CartItem } from "../../../types/cartTypes";
 import { useAppDispatch } from "../../../State/Store";
-import { updateCartItem } from "../../../State/customer/cartSlice";
+import {
+  deleteCartItem,
+  fetchUserCart,
+  updateCartItem,
+} from "../../../State/customer/cartSlice";
 
 const CartItem = ({ item }: { item: CartItem }) => {
   const dispatch = useAppDispatch();
+  const handleRemoveCartItem = async () => {
+    const jwt = localStorage.getItem("jwt");
+
+    if (!jwt) return;
+
+    try {
+      await dispatch(
+        deleteCartItem({
+          jwt,
+          cartItemId: item.id,
+        }),
+      ).unwrap();
+
+      dispatch(fetchUserCart(jwt));
+    } catch (error) {
+      console.log("Delete error", error);
+    }
+  };
 
   const handleUpdateQuantity = (value: number) => () => {
     const jwt = localStorage.getItem("jwt");
@@ -58,7 +80,10 @@ const CartItem = ({ item }: { item: CartItem }) => {
       <div className="flex justify-between items-center">
         <div className="px-5 py-2 flex justify-between items-center">
           <div className="flex itmes-center gap-2 w-[140px] justify-between">
-            <Button disabled={true} onClick={handleUpdateQuantity(1)}>
+            <Button
+              disabled={item.quantity <= 1}
+              onClick={handleUpdateQuantity(-1)}
+            >
               <RemoveIcon />
             </Button>
             <span>{item.quantity}</span>
@@ -68,11 +93,13 @@ const CartItem = ({ item }: { item: CartItem }) => {
           </div>
         </div>
         <div className="pr-5">
-          <p className="text-gray-700 font-medium"> Ksh {item.sellingPrice}</p>
+          <p className="text-gray-700 font-medium">
+            Ksh {item.product.sellingPrice * item.quantity}
+          </p>
         </div>
       </div>
       <div className="absolute top-1 right-1">
-        <IconButton color="primary">
+        <IconButton color="primary" onClick={handleRemoveCartItem}>
           <CloseIcon />
         </IconButton>
       </div>

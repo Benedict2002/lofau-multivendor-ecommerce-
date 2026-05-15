@@ -14,9 +14,6 @@ export const sellerLogin = createAsyncThunk<
         "/sellers/login",
         loginRequest
       );
-
-      
-
       const jwt = response.data.jwt;
       console.log("jwt sellerlogin -- ", jwt)
       localStorage.setItem("jwt", jwt)

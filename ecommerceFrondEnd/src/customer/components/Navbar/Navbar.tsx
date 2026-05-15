@@ -15,6 +15,7 @@ import CategorySheet from "./CategorySheet";
 import { mainCategory } from "../../../data/category/mainCategory";
 import { useNavigate } from "react-router-dom";
 import store, { useAppSelector } from "../../../State/Store";
+import Badge from "@mui/material/Badge";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -22,7 +23,10 @@ const Navbar = () => {
   const isLarge = useMediaQuery(theme.breakpoints.up("lg"));
   const [selectedCategory, setSelectedCategory] = useState("men");
   const [showCategorySheet, setShowCategorySheet] = useState(false);
-  const { auth } = useAppSelector((store) => store);
+  const { auth, cart } = useAppSelector((store) => store);
+  const totalItems =
+    cart.cart?.cartItems?.reduce((total, item) => total + item.quantity, 0) ||
+    0;
   return (
     <>
       <Box className="sticky top-0 left-0 right-0 bg-white" sx={{ zIndex: 2 }}>
@@ -87,10 +91,12 @@ const Navbar = () => {
               <FavoriteBorder sx={{ fontSize: 29 }} />
             </IconButton>
             <IconButton onClick={() => navigate("/cart")}>
-              <AddShoppingCartIcon
-                className="text-gray-700"
-                sx={{ fontSize: 29 }}
-              />
+              <Badge badgeContent={totalItems} color="primary">
+                <AddShoppingCartIcon
+                  className="text-gray-700"
+                  sx={{ fontSize: 29 }}
+                />
+              </Badge>
             </IconButton>
 
             {isLarge && (
