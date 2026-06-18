@@ -49,8 +49,15 @@ export const fetchSellerProfile = createAsyncThunk(
           Authorization: `Bearer ${jwt}`,
         },
       });
+      console.log("SELLER PROFILE --->", response.data);
 
-      return response.data;
+
+      
+
+localStorage.setItem("jwt", jwt);
+localStorage.setItem("role", "ROLE_SELLER"); 
+
+return response.data;
     } catch (error: any) {
       return rejectWithValue(
         error.response?.data?.message || "Failed to fetch seller profile"

@@ -30,7 +30,7 @@ export const signin = createAsyncThunk(
 
       console.log("login  response:", response.data);
       localStorage.setItem("jwt", response.data.jwt)
-      return response.data.jwt
+      return response.data;
       
     } catch (error: any) {
       console.error("Signin error:", error.response?.data || error.message);
@@ -46,7 +46,7 @@ export const signup = createAsyncThunk<any,any>(
 
       console.log("login  response:", response.data);
       localStorage.setItem("jwt", response.data.jwt)
-      return response.data.jwt
+      return response.data;
       
     } catch (error: any) {
       console.error("Signin error:", error.response?.data || error.message);
@@ -142,12 +142,19 @@ const authSlice = createSlice({
     //   state.loading = true;
     //   state.error = null;
     // });
-    builder.addCase(signin.fulfilled, (state, action) => {
-       state.jwt = action.payload;
-      state.isLoggedIn = true;
+    // builder.addCase(signin.fulfilled, (state, action) => {
+    //    state.jwt = action.payload;
+    //   state.isLoggedIn = true;
 
      
-    });
+    // });
+    builder.addCase(signin.fulfilled, (state, action) => {
+  state.jwt = action.payload.jwt;
+  state.isLoggedIn = true;
+
+  localStorage.setItem("jwt", action.payload.jwt);
+  localStorage.setItem("role", action.payload.role); // IMPORTANT
+});
     // builder.addCase(signin.rejected, (state, action) => {
     //   state.loading = false;
     //   state.error = action.payload as string;

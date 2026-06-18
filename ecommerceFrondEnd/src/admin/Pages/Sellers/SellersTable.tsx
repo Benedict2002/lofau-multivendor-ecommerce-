@@ -179,7 +179,7 @@ import { styled } from "@mui/material/styles";
 import Button from "@mui/material/Button";
 import { useAppDispatch, useAppSelector } from "../../../State/Store";
 import { useEffect } from "react";
-import { fetchSellers } from "../../../State/admin/sellerSlice";
+import { fetchSellers } from "../../../State/seller/sellerSlice";
 
 const accountStatu = [
   {

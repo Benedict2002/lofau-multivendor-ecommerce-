@@ -35,12 +35,15 @@ function App() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const token = auth.jwt || localStorage.getItem("jwt");
+    const token = localStorage.getItem("jwt");
+    const role = localStorage.getItem("role");
 
     if (!token) return;
 
-    dispatch(fetchUserCart(token));
-  }, [auth.jwt, dispatch]);
+    if (role === "ROLE_CUSTOMER") {
+      dispatch(fetchUserCart(token));
+    }
+  }, [dispatch]);
 
   // useEffect(() => {
   //   const jwt = localStorage.getItem("jwt");
@@ -60,27 +63,43 @@ function App() {
   //   dispatch(createHomeCategories(homeCategories));
   // }, []); // ✅ ADD THIS
   useEffect(() => {
-    const token = auth.jwt || localStorage.getItem("jwt");
+    const token = localStorage.getItem("jwt");
+    const role = localStorage.getItem("role");
+
     if (!token) return;
 
-    // Only fetch seller profile if user is a SELLER
-    if (auth.user?.role === "ROLE_SELLER") {
-      dispatch(fetchSellerProfile(token));
+    // CUSTOMER
+    if (role === "ROLE_CUSTOMER") {
+      dispatch(fetchUserProfile(token));
     }
-  }, [auth.jwt, auth.user?.role, dispatch]);
+
+    // SELLER
+    if (role === "ROLE_SELLER") {
+      dispatch(fetchSellerProfile());
+    }
+  }, [dispatch]);
+
+  //const auth = useAppSelector((store) => store.auth);
 
   useEffect(() => {
-    if (seller.profile) {
-      navigate("/seller");
+    if (auth.jwt) {
+      const role = localStorage.getItem("role");
+
+      if (role === "ROLE_SELLER") {
+        navigate("/seller");
+      }
+      if (role === "ROLE_CUSTOMER") {
+        navigate("/");
+      }
     }
-  }, [seller.profile]);
-
-  useEffect(() => {
-    const token = auth.jwt || localStorage.getItem("jwt");
-    if (!token) return;
-
-    dispatch(fetchUserProfile(token));
   }, [auth.jwt]);
+
+  // useEffect(() => {
+  //   const token = auth.jwt || localStorage.getItem("jwt");
+  //   if (!token) return;
+
+  //   dispatch(fetchUserProfile(token));
+  // }, [auth.jwt]);
 
   return (
     <ThemeProvider theme={customeTheme}>

@@ -23,10 +23,16 @@ const Navbar = () => {
   const isLarge = useMediaQuery(theme.breakpoints.up("lg"));
   const [selectedCategory, setSelectedCategory] = useState("men");
   const [showCategorySheet, setShowCategorySheet] = useState(false);
-  const { auth, cart } = useAppSelector((store) => store);
+
+  const { auth, cart, sellerAuth, seller } = useAppSelector((store) => store);
+
   const totalItems =
     cart.cart?.cartItems?.reduce((total, item) => total + item.quantity, 0) ||
     0;
+
+  const currentUser = auth.user || seller.profile || sellerAuth.user;
+  const storeState = useAppSelector((store) => store);
+
   return (
     <>
       <Box className="sticky top-0 left-0 right-0 bg-white" sx={{ zIndex: 2 }}>
@@ -69,7 +75,7 @@ const Navbar = () => {
             <IconButton>
               <SearchIcon />
             </IconButton>
-            {auth.user ? (
+            {currentUser ? (
               <Button
                 onClick={() => navigate("/account/orders")}
                 className="flex items-center gap-2"
@@ -79,7 +85,10 @@ const Navbar = () => {
                   src="https://cdn.pixabay.com/photo/2015/04/15/09/28/head-723540_640.jpg"
                 />
                 <h1 className="font-semibold hidden lg:block">
-                  {auth.user?.fullName}
+                  {currentUser?.fullName ||
+                    currentUser?.businessName ||
+                    currentUser?.sellerName ||
+                    "Seller"}
                 </h1>
               </Button>
             ) : (

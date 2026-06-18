@@ -5,31 +5,31 @@ import React from "react";
 import { useAppDispatch } from "../../../State/Store";
 import { sendLoginSignUpOtp, signin } from "../../../State/AuthSlice";
 import { sellerLogin } from "../../../State/seller/SellerAuthSlice";
+import { useNavigate } from "react-router-dom";
 
 const SellerLoginForm = () => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
   const formik = useFormik({
     initialValues: {
       email: "",
       otp: "",
     },
-    /* onSubmit: (values) => {
-      console.log("form data", values);
-      //values.otp=Number(values.otp)
-      dispatch(sellerLogin({ email: values.email, otp: values.otp }));
-    }, */
-    onSubmit: async (values) => {
-      console.log("form data", values);
 
+    onSubmit: async (values) => {
       try {
         const res = await dispatch(
           sellerLogin({
             email: values.email,
             otp: values.otp,
-          })
+          }),
         ).unwrap();
 
         console.log("LOGIN SUCCESS:", res);
+
+        // 🔥 redirect seller
+        navigate("/seller");
       } catch (err) {
         console.error("LOGIN ERROR:", err);
       }
@@ -43,6 +43,7 @@ const SellerLoginForm = () => {
   const handleLogin = () => {
     /* dispatch(signin({email:})) */
   };
+
   return (
     <div>
       <h1 className="text-center font-bold text-xl  text-[#00927c] pb-5">
