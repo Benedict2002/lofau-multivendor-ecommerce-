@@ -74,6 +74,34 @@ The system can be extended with payment gateway integration, email notifications
 
 The frontend is still under active development, and payment processing has not yet been implemented. The moderation system is also basic and can be improved further.
 
+
+## Screenshots
+
+Below are key UI and system views of the LOFAU Multivendor Ecommerce Platform:
+
+### Home / Landing Page
+![Image 0](./ecommerce-multivendor/image0.png)
+
+### Login Page
+![Image 1](./ecommerce-multivendor/image1.png)
+
+### Deals
+![Image 2](./ecommerce-multivendor/image2.png)
+
+### Product Details Page
+![Image 3](./ecommerce-multivendor/image3.png)
+
+### HomePage
+![Image 4](./ecommerce-multivendor/image4.png)
+
+### Product Listing
+![Image 5](./ecommerce-multivendor/image5.png)
+
+### Product view
+![Image 6](./ecommerce-multivendor/image6.png)
+
+### ### Cart / Checkout Page
+![Image 7](./ecommerce-multivendor/image7.png)
 ---
 
 ## Author
