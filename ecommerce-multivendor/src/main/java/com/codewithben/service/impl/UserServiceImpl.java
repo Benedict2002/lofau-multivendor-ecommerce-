@@ -29,7 +29,7 @@ public class UserServiceImpl implements UserService {
     public User findUserByEmail(String email) throws Exception {
         User user =userRepository.findByEmail(email);
         if(user==null){
-            throw new Exception("user not found with email -"+email);
+            throw new Exception("user not found with email "+email);
         }
         return user;
     }

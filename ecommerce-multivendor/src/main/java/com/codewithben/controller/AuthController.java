@@ -3,6 +3,7 @@ package com.codewithben.controller;
 import com.codewithben.domain.USER_ROLE;
 import com.codewithben.model.User;
 import com.codewithben.model.VerificationCode;
+import com.codewithben.repository.SellerRepository;
 import com.codewithben.repository.UserRepository;
 import com.codewithben.request.LoginOtpRequest;
 import com.codewithben.request.LoginRequest;
@@ -21,8 +22,8 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class AuthController {
     private final UserRepository userRepository;
+    private final SellerRepository sellerRepository;
     private final AuthService authService;
-
     @PostMapping("/signup")
    public ResponseEntity<AuthResponse> createUserHandler( @RequestBody SignupRequest req ) throws Exception {
 
@@ -54,6 +55,15 @@ public class AuthController {
     @PostMapping("/signing")
     public ResponseEntity<AuthResponse> loginHandler(@RequestBody LoginRequest req ) throws Exception {
 
+
+        // Check if email belongs to seller
+        boolean isSeller =
+                sellerRepository.findByEmail(req.getEmail()) != null;
+
+        // Automatically add prefix
+        if (isSeller) {
+            req.setEmail("seller_" + req.getEmail());
+        }
          AuthResponse authResponse=  authService.signing(req);
 
 
