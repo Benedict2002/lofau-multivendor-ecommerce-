@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="0aaad1e6-3d19-42f2-8751-5932321642b1" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/ecommerce-multivendor/src/main/java/com/codewithben/controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce-multivendor/src/main/java/com/codewithben/controller/AuthController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecommerce-multivendor/src/main/java/com/codewithben/service/impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce-multivendor/src/main/java/com/codewithben/service/impl/UserServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecommerceFrondEnd/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerceFrondEnd/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecommerceFrondEnd/src/State/AuthSlice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerceFrondEnd/src/State/AuthSlice.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecommerceFrondEnd/src/State/admin/sellerSlice.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecommerceFrondEnd/src/State/seller/sellerSlice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerceFrondEnd/src/State/seller/sellerSlice.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecommerceFrondEnd/src/admin/Pages/Sellers/SellersTable.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerceFrondEnd/src/admin/Pages/Sellers/SellersTable.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecommerceFrondEnd/src/customer/components/Navbar/Navbar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerceFrondEnd/src/customer/components/Navbar/Navbar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecommerceFrondEnd/src/customer/pages/Become Seller/SellerLoginForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerceFrondEnd/src/customer/pages/Become Seller/SellerLoginForm.tsx" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="McpProjectServerCommands">
+    <commands />
+    <urls />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 5,
+  "fromUser": false
+}]]></component>
+  <component name="ProjectId" id="3FACPmnapB3FIqSf7AHxIqCEPSd" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.MCP Project settings loaded": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
+    "git-widget-placeholder": "main",
+    "junie.onboarding.icon.badge.shown": "true",
+    "nodejs_package_manager_path": "npm",
+    "to.speed.mode.migration.done": "true",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="0aaad1e6-3d19-42f2-8751-5932321642b1" name="Changes" comment="" />
+      <created>1781508469630</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1781508469630</updated>
+      <workItem from="1781508476693" duration="35000" />
+    </task>
+    <servers />
+  </component>
+</project>
