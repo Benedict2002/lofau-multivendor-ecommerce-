@@ -5,7 +5,7 @@ import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
-import type { CartItem } from "../../../types/cartTypes";
+import type { CartItem as CartItemType } from "../../../types/cartTypes";
 
 import { useAppDispatch } from "../../../State/Store";
 import {
@@ -14,7 +14,7 @@ import {
   updateCartItem,
 } from "../../../State/customer/cartSlice";
 
-const CartItem = ({ item }: { item: CartItem }) => {
+const CartItem = ({ item }: { item: CartItemType }) => {
   const dispatch = useAppDispatch();
   const handleRemoveCartItem = async () => {
     const jwt = localStorage.getItem("jwt");
