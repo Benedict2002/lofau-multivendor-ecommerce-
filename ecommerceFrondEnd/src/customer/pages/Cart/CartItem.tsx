@@ -1,11 +1,12 @@
 import Button from "@mui/material/Button";
 import Divider from "@mui/material/Divider";
-import React from "react";
+
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import type { CartItem } from "../../../types/cartTypes";
+
 import { useAppDispatch } from "../../../State/Store";
 import {
   deleteCartItem,

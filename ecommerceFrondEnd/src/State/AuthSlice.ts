@@ -22,22 +22,43 @@ export const sendLoginSignUpOtp = createAsyncThunk(
 
 
 // Async thunk for signing in
-export const signin = createAsyncThunk(
+interface LoginRequest {
+  email: string;
+  otp: string;
+}
+
+export const signin = createAsyncThunk<any, LoginRequest>(
   "auth/signin",
   async (loginRequest, { rejectWithValue }) => {
     try {
       const response = await api.post("/auth/signing", loginRequest);
 
-      console.log("login  response:", response.data);
-      localStorage.setItem("jwt", response.data.jwt)
+      localStorage.setItem("jwt", response.data.jwt);
+
       return response.data;
-      
     } catch (error: any) {
-      console.error("Signin error:", error.response?.data || error.message);
-      return rejectWithValue(error.response?.data || "Login failed");
+      return rejectWithValue(
+        error.response?.data || "Login failed"
+      );
     }
   }
 );
+// export const signin = createAsyncThunk(
+//   "auth/signin",
+//   async (loginRequest, { rejectWithValue }) => {
+//     try {
+//       const response = await api.post("/auth/signing", loginRequest);
+
+//       console.log("login  response:", response.data);
+//       localStorage.setItem("jwt", response.data.jwt)
+//       return response.data;
+      
+//     } catch (error: any) {
+//       console.error("Signin error:", error.response?.data || error.message);
+//       return rejectWithValue(error.response?.data || "Login failed");
+//     }
+//   }
+// );
 export const signup = createAsyncThunk<any,any>(
   "auth/signup",
   async (signupRequest, { rejectWithValue }) => {

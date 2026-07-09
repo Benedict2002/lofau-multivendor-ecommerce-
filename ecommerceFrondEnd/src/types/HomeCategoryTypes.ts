@@ -9,11 +9,12 @@ export interface HomeData{
     dealCategories: HomeCategory[];
 }
 
-export interface HomeCategory{
-    id: number;
+export interface HomeCategory {
+    id?: number;
     categoryId: string;
     section?: string;
-    name?:string;
+    name?: string;
+    title?: string;
     image: string;
     parentCategoryId?: string;
 }
