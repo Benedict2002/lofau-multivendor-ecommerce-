@@ -1,18 +1,14 @@
-import FormControl from "@mui/material/FormControl";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import Paper from "@mui/material/Paper";
-import Select from "@mui/material/Select";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import React, { useState } from "react";
+import { useState } from "react";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import { styled } from "@mui/material/styles";
 import Button from "@mui/material/Button";
 import Delete from "@mui/icons-material/Delete";
+import Paper from "@mui/material/Paper";
 
 const accountStatu = [
   {
@@ -77,7 +73,7 @@ function createData(
   calories: number,
   fat: number,
   carbs: number,
-  protein: number
+  protein: number,
 ) {
   return { name, calories, fat, carbs, protein };
 }

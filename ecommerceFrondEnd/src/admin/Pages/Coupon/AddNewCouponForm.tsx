@@ -1,5 +1,5 @@
 import { useFormik } from "formik";
-import React from "react";
+
 import type { Dayjs } from "dayjs";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";

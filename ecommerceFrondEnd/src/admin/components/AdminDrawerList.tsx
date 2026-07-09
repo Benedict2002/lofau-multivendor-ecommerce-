@@ -1,4 +1,3 @@
-import React from "react";
 import DrawerList from "../../component/DrawerList";
 import AccountBox from "@mui/icons-material/AccountBox";
 import Logout from "@mui/icons-material/Logout";
