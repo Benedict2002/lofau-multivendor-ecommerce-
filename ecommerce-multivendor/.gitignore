@@ -34,8 +34,11 @@ build/
 
 ##
 # Spring Boot config files
-src/main/resources/application*.properties
+#src/main/resources/application*.properties
 src/main/resources/application*.yml
+
+# Secrets
+src/main/resources/application-secret*.properties
 # Ignore service package
 #src/main/java/com/codewithben/service/
 
