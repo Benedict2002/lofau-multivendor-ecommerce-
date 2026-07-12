@@ -30,7 +30,7 @@ public class EmailService {
 
 
         }catch (MailException e){
-           throw new MailSendException("failed to send email");
+            throw new MailSendException("failed to send email");
         }
     }
 }
