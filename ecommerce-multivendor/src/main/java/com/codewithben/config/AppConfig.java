@@ -88,7 +88,7 @@ public class AppConfig {
 private CorsConfigurationSource corsConfigurationSource() {
     return request -> {
         CorsConfiguration cfg = new CorsConfiguration();
-        cfg.setAllowedOrigins(Collections.singletonList("http://localhost:5173")); // ✅ NO SLASH
+        cfg.setAllowedOrigins(Collections.singletonList("https://shophub-orpin-mu.vercel.app")); // ✅ NO SLASH
         cfg.setAllowedMethods(Collections.singletonList("*"));
         cfg.setAllowedHeaders(Collections.singletonList("*"));
         cfg.setAllowCredentials(true);
